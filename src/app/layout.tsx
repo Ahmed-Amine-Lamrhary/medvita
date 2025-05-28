@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Poppins } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import 'react-datepicker/dist/react-datepicker.css';
 
 const poppins = Poppins({
   variable: "--font-geist-sans",

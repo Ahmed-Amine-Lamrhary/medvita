@@ -43,7 +43,7 @@ export default function Navbar() {
                             />
                             <IoSearchOutline className='absolute top-3 right-2.5' />
                         </div>
-                        <button className="flex items-center space-x-1 bg-[#F28C38] text-white px-3 py-2 rounded-full hover:bg-[#e07b2c]">
+                        <Link href="/cart" className="flex items-center space-x-1 bg-[#F28C38] text-white px-3 py-2 rounded-full hover:bg-[#e07b2c]">
                             <svg
                                 className="w-5 h-5"
                                 fill="none"
@@ -55,7 +55,7 @@ export default function Navbar() {
                             </svg>
                             <span>Mon Devis</span>
                             <span className="bg-white text-[#F28C38] rounded-full w-5 h-5 flex items-center justify-center text-xs">0</span>
-                        </button>
+                        </Link>
                         {/* Mobile Menu Button */}
                         <div className="md:hidden">
                             <button
