@@ -1,6 +1,8 @@
+'use client';
+
 import React from "react";
-import categories from "@/utils/data/categories.json";
 import Category from "./Category";
+import LoadingBox from "../LoadingBox";
 
 export default function Categories() {
     return (
@@ -10,11 +12,18 @@ export default function Categories() {
                 Explorez notre gamme complète d’équipements médicaux classés par catégorie.
             </p>
 
-            <div className="grid grid-cols-4 gap-6 mt-6">
-                {categories.map((category, index) => (
-                    <Category key={index} category={category} />
-                ))}
-            </div>
+
+            <LoadingBox endpoint="categories/all">
+                {
+                    (categories: string[]) => (
+                        <div className="grid grid-cols-4 gap-6 mt-6">
+                            {categories.map((category, index) => (
+                                <Category key={index} category={{ img: "/images/Ellipse 2.png", name: category }} />
+                            ))}
+                        </div>
+                    )
+                }
+            </LoadingBox>
         </section>
     );
 }

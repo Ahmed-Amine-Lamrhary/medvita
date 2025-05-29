@@ -1,6 +1,8 @@
+'use client';
+
 import React from "react";
-import products from "@/utils/data/products.json";
-import Product from "./Product";
+import Product, { ProductType } from "./Product";
+import LoadingBox from "../LoadingBox";
 
 export default function Products() {
     return (
@@ -10,11 +12,17 @@ export default function Products() {
                     Nouveaux équipements technologiques disponibles
                 </h2>
 
-                <div className="grid grid-cols-4 gap-6 mt-6">
-                    {products.map((product, index) => (
-                        <Product key={index} product={product} />
-                    ))}
-                </div>
+                <LoadingBox endpoint="equipment">
+                    {
+                        (products: ProductType[]) => (
+                            <div className="grid grid-cols-4 gap-6 mt-6">
+                                {products.map((product, index) => (
+                                    <Product key={index} product={product} />
+                                ))}
+                            </div>
+                        )
+                    }
+                </LoadingBox>
             </div>
         </section>
     );

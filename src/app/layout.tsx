@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import 'react-datepicker/dist/react-datepicker.css';
+import { Toaster } from "sonner";
 
 const poppins = Poppins({
   variable: "--font-geist-sans",
@@ -27,6 +28,8 @@ export default function RootLayout({
       <body
         className={`${poppins.variable} antialiased`}
       >
+        <Toaster position="bottom-right" richColors expand />
+
         <Navbar />
 
         {children}
