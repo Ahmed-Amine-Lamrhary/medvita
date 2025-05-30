@@ -44,7 +44,7 @@ export default function ProductPage() {
                                 </ul>
 
                                 <div className="mt-10">
-                                    <AddToQuote />
+                                    <AddToQuote product={product} />
                                 </div>
                             </div>
                         </div>

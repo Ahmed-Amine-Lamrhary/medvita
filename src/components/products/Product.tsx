@@ -4,9 +4,11 @@ import Link from 'next/link';
 
 export interface ProductType {
     id: number;
-    img: string;
+    image: string;
     name: string;
     description: string;
+    purchasePrice: number;
+    dailyRentalPrice: number;
 }
 
 interface ProductProps {
@@ -18,7 +20,7 @@ export default function Product({ product }: ProductProps) {
         <div className="bg-white shadow-lg rounded-xl overflow-hidden transform hover:-translate-y-2 transition-all duration-300 ease-in-out border border-gray-100 hover:border-[#F28C38]">
             <div className="relative w-full h-64">
                 <Image
-                    src={`/${product.img}`}
+                    src={`/${product.image}`}
                     alt={product.name}
                     layout="fill"
                     objectFit="cover"

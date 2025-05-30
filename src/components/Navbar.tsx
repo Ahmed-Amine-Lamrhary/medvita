@@ -54,7 +54,6 @@ export default function Navbar() {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h18M7 7v10a2 2 0 002 2h6a2 2 0 002-2V7m-8 0h8" />
                             </svg>
                             <span>Mon Devis</span>
-                            <span className="bg-white text-[#F28C38] rounded-full w-5 h-5 flex items-center justify-center text-xs">0</span>
                         </Link>
                         {/* Mobile Menu Button */}
                         <div className="md:hidden">

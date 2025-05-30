@@ -1,11 +1,56 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { RiShoppingCart2Line } from 'react-icons/ri';
+import { toast } from 'sonner';
+import { CartItem } from './MedicalCart';
+import { ProductType } from '../products/Product';
 
-export default function AddToQuote() {
+export default function AddToQuote({ product }: { product: ProductType }) {
     const [quantity, setQuantity] = useState(1);
 
     const increment = () => setQuantity((prev) => prev + 1);
     const decrement = () => setQuantity((prev) => Math.max(1, prev - 1));
+
+    function addToCart() {
+        const itemFromCart = getItemFromCart();
+
+        if (itemFromCart.item === null) {
+            itemFromCart.cartItems.push({ product, quantity, mode: 'buy', rentStart: new Date(), rentEnd: new Date() });
+        }
+        else {
+            if (quantity > 0) {
+                itemFromCart.cartItems[itemFromCart.index].quantity = quantity;
+            }
+            else {
+                itemFromCart.cartItems = itemFromCart.cartItems.filter((item: any, index: number) => index !== itemFromCart.index);
+            }
+        }
+
+        localStorage.setItem('cart', JSON.stringify(itemFromCart.cartItems));
+
+        toast.success(`Produit "${decodeURIComponent(product.name)}" ajouté au devis avec une quantité de ${quantity}.`);
+    }
+
+    function getItemFromCart(): { cartItems: CartItem[], item: CartItem | null, index: number } {
+        const cart = localStorage.getItem('cart');
+
+        let cartItems: CartItem[] = cart ? JSON.parse(cart) : [];
+
+        const existingItemIndex = cartItems.findIndex((item: any) => item.name === product.name);
+
+        if (existingItemIndex !== -1) {
+            return { cartItems, item: cartItems[existingItemIndex], index: existingItemIndex };
+        }
+
+        return { cartItems: [], item: null, index: -1 };
+    }
+
+    useEffect(() => {
+        const itemFromCart = getItemFromCart();
+
+        if (itemFromCart.item) {
+            setQuantity(itemFromCart.item.quantity);
+        }
+    }, []);
 
     return (
         <div className="flex items-center gap-4">
@@ -25,7 +70,7 @@ export default function AddToQuote() {
                 </button>
             </div>
 
-            <button className="bg-orange-500 hover:bg-orange-600 transition text-white font-medium rounded-full flex items-center px-6 py-3 text-base">
+            <button onClick={addToCart} className="bg-orange-500 hover:bg-orange-600 transition text-white font-medium rounded-full flex items-center px-6 py-3 text-base">
                 <RiShoppingCart2Line className="w-5 h-5 mr-2" />
                 Ajouter au devis
             </button>
