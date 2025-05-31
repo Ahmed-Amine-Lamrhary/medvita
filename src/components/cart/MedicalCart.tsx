@@ -1,10 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { differenceInDays } from 'date-fns';
-import Link from 'next/link';
 import { ProductType } from '../products/Product';
+import { useFormikContext } from 'formik';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 export interface CartItem {
     product: ProductType,
@@ -14,8 +14,8 @@ export interface CartItem {
     rentEnd?: Date
 }
 
-export default function MedicalCart() {
-    const [items, setItems] = useState<CartItem[]>([]);
+export default function MedicalCart({ items, setItems }: { items: CartItem[], setItems: (items: CartItem[]) => void }) {
+    const { isSubmitting } = useFormikContext();
 
     const updateItem = (index: number, changes: any) => {
         const newItems = [...items];
@@ -38,29 +38,8 @@ export default function MedicalCart() {
         return days > 0 ? days : 0;
     };
 
-    useEffect(() => {
-        setItems(
-            JSON.parse(localStorage.getItem('cart') || '[]') || []
-        );
-    }, []);
-
-    if (items.length === 0) {
-        return (
-            <div className="max-w-3xl mx-auto p-14 text-center">
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">Votre panier est vide</h2>
-                <p className="text-gray-600">Ajoutez des produits à votre panier pour commencer.</p>
-
-                <div className="mt-10">
-                    <Link href="/products" className="cursor-pointer w-full bg-gradient-to-r from-[#F28C38] to-[#e07b2c] text-white px-6 py-3 rounded-lg hover:from-[#e07b2c] hover:to-[#F28C38] transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105">
-                        Voir les produits
-                    </Link>
-                </div>
-            </div>
-        );
-    }
-
     return (
-        <div className="space-y-10 p-14 max-w-3xl mx-auto">
+        <div>
             {items.map((item: CartItem, index: number) => {
                 const rentalDays = getRentalDays(item.rentStart, item.rentEnd);
 
@@ -167,8 +146,8 @@ export default function MedicalCart() {
                 );
             })}
 
-            <button className="cursor-pointer w-full bg-gradient-to-r from-[#F28C38] to-[#e07b2c] text-white px-6 py-3 rounded-lg hover:from-[#e07b2c] hover:to-[#F28C38] transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105">
-                Valider la commande
+            <button disabled={isSubmitting} type="submit" className="mt-5 flex justify-center items-center text-center cursor-pointer w-full bg-gradient-to-r from-[#F28C38] to-[#e07b2c] text-white px-6 py-3 rounded-lg hover:from-[#e07b2c] hover:to-[#F28C38] transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105">
+                {isSubmitting && <AiOutlineLoading3Quarters size={15} className='animate-spin text-white me-2' />} Valider la commande
             </button>
         </div>
     );
