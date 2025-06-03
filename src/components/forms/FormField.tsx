@@ -7,7 +7,7 @@ import 'react-phone-input-2/lib/style.css'
 
 export interface FormFieldProps {
     label: string;
-    type: "text" | "textarea" | "email" | "password" | "number" | "tel" | "select" | "hidden" | "country";
+    type: "text" | "tel" | "date" | "textarea" | "email" | "password" | "number" | "telephone" | "select" | "hidden" | "country";
     name: string;
     icon?: ReactNode;
     rounded?: boolean;
@@ -75,7 +75,7 @@ export default function FormField({
                         );
                     }
 
-                    if (type === "tel") {
+                    if (type === "telephone") {
                         return (
                             <PhoneInput
                                 {...field}
@@ -109,7 +109,7 @@ export default function FormField({
                     if (!msg) return null;
 
                     return (
-                        <div className={`message error-message ${errorLabelClassName}`}>
+                        <div className={`message text-xs font-medium text-red-700 mt-2 ${errorLabelClassName}`}>
                             {msg}
                         </div>
                     )

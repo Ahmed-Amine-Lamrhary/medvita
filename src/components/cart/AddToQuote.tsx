@@ -33,15 +33,15 @@ export default function AddToQuote({ product }: { product: ProductType }) {
     function getItemFromCart(): { cartItems: CartItem[], item: CartItem | null, index: number } {
         const cart = localStorage.getItem('cart');
 
-        let cartItems: CartItem[] = cart ? JSON.parse(cart) : [];
+        const cartItems: CartItem[] = cart ? JSON.parse(cart) : [];
 
-        const existingItemIndex = cartItems.findIndex((item: any) => item.name === product.name);
+        const existingItemIndex = cartItems.findIndex((item: any) => item.product.name == product.name);
 
         if (existingItemIndex !== -1) {
             return { cartItems, item: cartItems[existingItemIndex], index: existingItemIndex };
         }
 
-        return { cartItems: [], item: null, index: -1 };
+        return { cartItems, item: null, index: -1 };
     }
 
     useEffect(() => {

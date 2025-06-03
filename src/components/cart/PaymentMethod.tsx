@@ -20,7 +20,7 @@ export default function PaymentMethod({
     imageWidth,
     disabled,
     disabledMessage,
-    subTitle = "Secure and encrypted",
+    subTitle,
     onChange
 }: PaymentMethodProps) {
     const { values }: any = useFormikContext();
@@ -60,7 +60,7 @@ export default function PaymentMethod({
                 </div>
 
                 <img
-                    src={`/images/checkout/${image}`}
+                    src={`/assets/${image}`}
                     width={imageWidth}
                     alt=""
                     className="ml-4"

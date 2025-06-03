@@ -39,7 +39,7 @@ export default function MedicalCart({ items, setItems }: { items: CartItem[], se
     };
 
     return (
-        <div>
+        <div className='space-y-4'>
             {items.map((item: CartItem, index: number) => {
                 const rentalDays = getRentalDays(item.rentStart, item.rentEnd);
 
