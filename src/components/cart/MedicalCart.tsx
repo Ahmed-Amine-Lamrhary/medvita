@@ -58,7 +58,8 @@ export default function MedicalCart({ items, setItems }: { items: CartItem[], se
                 return (
                     <div key={item.product.id} className="p-4 bg-white border-2 border-gray-100 rounded-md space-y-4">
                         <div className="flex items-center gap-4">
-                            <img src={item.product.image} alt={item.product.name} className="w-24 h-20 rounded-md object-cover" />
+                            <img src={`${process.env.NEXT_PUBLIC_API_URL}/images/${item.product.imageName}`}
+                    alt={item.product.name} className="w-24 h-20 rounded-md object-cover" />
                             <div className="flex-1">
                                 <h3 className="text-lg font-bold">{decodeURIComponent(item.product.name)}</h3>
 

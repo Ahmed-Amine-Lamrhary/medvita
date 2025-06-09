@@ -19,7 +19,7 @@ export const callApi = async (callApiBody: CallApiI): Promise<any> => {
         const result = await response.json();
 
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}, message: ${result.message || 'Unknown error'}`);
+            throw new Error(`erreur: ${result.message || 'Unknown error'}`);
         }
 
         return {

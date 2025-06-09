@@ -4,11 +4,12 @@ import Link from 'next/link';
 
 export interface ProductType {
     id: number;
-    image: string;
+    imageName: string;
     name: string;
     description: string;
     purchasePrice: number;
     dailyRentalPrice: number;
+    features?: string;
 }
 
 interface ProductProps {
@@ -19,11 +20,9 @@ export default function Product({ product }: ProductProps) {
     return (
         <div className="bg-white shadow-lg rounded-xl overflow-hidden transform hover:-translate-y-2 transition-all duration-300 ease-in-out border border-gray-100 hover:border-[#F28C38]">
             <div className="relative w-full h-64">
-                <Image
-                    src={`/${product.image}`}
+                <img
+                    src={`${process.env.NEXT_PUBLIC_API_URL}/images/${product.imageName}`}
                     alt={product.name}
-                    layout="fill"
-                    objectFit="cover"
                     className="rounded-t-xl transition-opacity duration-300"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#003087]/70 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">

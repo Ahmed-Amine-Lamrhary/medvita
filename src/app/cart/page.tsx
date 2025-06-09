@@ -100,7 +100,7 @@ export default function Checkout() {
       setInvoiceUrl(invoiceUrl);
     } catch (error: any) {
       console.error('Error loading data:', error);
-      toast.error(error.message);
+      toast.error(error.message || "Une erreur s'est produite lors de l'envoi du devis.");
     }
   }
 

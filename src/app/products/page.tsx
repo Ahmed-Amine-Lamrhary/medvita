@@ -57,7 +57,7 @@ export default function ProductsPage() {
           (products: ProductType[]) => (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {products.map((product: ProductType, index: number) => (
-                <Product key={index} product={{ ...product, img: 'images/Prothese.png' }} />
+                <Product key={index} product={{ ...product, imageName: product.imageName }} />
               ))}
             </div>
           )
